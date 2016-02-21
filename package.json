@@ -1,36 +1,36 @@
 {
-  "name": "folksonomy",
-  "version": "0.0.1",
-  "description": "a fun thing",
-  "main": "e.js",
-  "dependencies": {
-    "cmd_style": "1.1.0",
-    "expert": "x.x",
-    "underscore": "x.x",
-    "string": "x.x"
-  },
-  "engines": {
-    "node": "0.12.7"
-  },
-  "license": "MIT",
-  "devDependencies": {},
-  "scripts": {
-    "test": "node eg test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/antfriend/e.git"
-  },
-  "keywords": [
-    "rapid",
-    "taxonomy",
-    "builder",
-    "folksonomy",
-    "library"
-  ],
-  "author": "antfriend",
-  "bugs": {
-    "url": "https://github.com/antfriend/e/issues"
-  },
-  "homepage": "https://github.com/antfriend/e#readme"
+    "name": "folksonomy",
+    "version": "0.0.2",
+    "description": "a fun thing",
+    "main": "e.js",
+    "dependencies": {
+        "cmd_style": "x.x",
+        "expert": "x.x",
+        "underscore": "x.x",
+        "string": "x.x"
+    },
+    "engines": {
+        "node": "0.12.7"
+    },
+    "license": "MIT",
+    "devDependencies": {},
+    "scripts": {
+        "test": "node eg test"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/antfriend/e.git"
+    },
+    "keywords": [
+        "rapid",
+        "taxonomy",
+        "builder",
+        "folksonomy",
+        "library"
+    ],
+    "author": "antfriend",
+    "bugs": {
+        "url": "https://github.com/antfriend/e/issues"
+    },
+    "homepage": "https://github.com/antfriend/e#readme"
 }

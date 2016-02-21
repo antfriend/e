@@ -6,8 +6,6 @@
 //
 
 var b = require('cmd_style');
-var expert = require('expert'),
-    _ = require('underscore');
 var pr = require('./primary_representation.json');
 var eg = require('./eg.js');
 //var ConceptNet = require('concept-net');//https://www.npmjs.com/package/concept-net
@@ -19,7 +17,7 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-b.box1('ee\rg\rdeduce');
+b.box1('rapid\rfolksonomy\rbuilder');
 loop('hello ');
 
 function loop(the_question) {

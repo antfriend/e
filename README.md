@@ -1,4 +1,3 @@
-# e
-statement parser
-a rapid taxonomy / folksonomy builder
+# folksonomy
 
+a rapid taxonomy, folksonomy builder
