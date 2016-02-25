@@ -2,14 +2,13 @@
 /*jshint esversion: 6 */
 "use strict";
 //
-//eg
+//folksonomy console interface
 //
 
 var b = require('cmd_style');
-var pr = require('./primary_representation.json');
-var eg = require('./eg.js');
-//var ConceptNet = require('concept-net');//https://www.npmjs.com/package/concept-net
-//http://conceptnet5.media.mit.edu/data/5.4/c/en/toast
+require('./primary_representation.json');
+var folk = require('./folksonomy.js');
+
 const readline = require('readline');
 
 const rl = readline.createInterface({
@@ -18,13 +17,13 @@ const rl = readline.createInterface({
 });
 
 b.box1('rapid\rfolksonomy\rbuilder');
+b.box1('"exit" to end\rend with a "?" to make a question\rotherwise, just enter a statement');
 loop('hello ');
 
 function loop(the_question) {
     console.log('*' + the_question);
     rl.question('>', (answer) => {
-        //var pr_tokens = string_to_pr(answer);
-        eg.process_tokens(eg.string_to_pr(answer), function(response_message) {
+        folk.process_tokens(folk.string_to_pr(answer), function(response_message) {
             if (response_message === 'exit') {
                 console.log('exiting, thank you for such a nice time!');
                 rl.close();
@@ -32,5 +31,5 @@ function loop(the_question) {
                 loop(response_message);
             }
         });
-    }); //end rl.question
+    });
 }

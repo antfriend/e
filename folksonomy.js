@@ -2,16 +2,15 @@
 /*jshint esversion: 6 */
 "use strict";
 //
-//folksonomy root
+//port of entry for building and querying a folksonomy
+//accepts a statement or question and returns a reply
+//input can be a string of terms, for use in a web interface, or the accompanying (start.js) interactive console
+//or as arguments to this module on the command line
 //
 
-var pr = require('./primary_representation.json');
-var expert = require('expert'),
-    _ = require('underscore');
-
-var domain = expert.Domain(),
-    Concept = domain.Concept,
-    Relation = domain.Relation;
+var pr = require('./primary_representation.json'),
+    statement = require('./statement.js'),
+    question = require('./question.js');
 
 //start from a single string, for web or other use
 function string_to_pr(the_string) {
@@ -50,35 +49,13 @@ function process_arguments(argumentatitves, console_or_not) {
 function process_tokens(pr_tokens, callback) {
     var response_message = '';
     if (pr_tokens.tokens) {
-        for (var i = 0, len = pr_tokens.tokens.length; i < len; i++) {
-            //
-            if (i === len - 1) //this is the last iteration
-            {
-                if (pr_tokens.question === true) {
-                    response_message = pr.tokens[0] + '?';
-                } else {
-                    response_message = pr.tokens[i];
-                }
-            } else { //this is every iteration except the last
-                console.log('working on ' + pr.tokens[i]);
-            }
+        if (pr_tokens.question === false) {
+            response_message = statement.tokenResponse(pr_tokens);
+        } else {
+            response_message = question.tokenResponse(pr_tokens);
         }
+
     }
     callback(response_message);
 }
 exports.process_tokens = process_tokens;
-
-// function preprocess_term(this_term)
-// {
-//     return this_term;
-// }
-
-// function interpret_statement(these_terms)
-// {
-
-// }
-
-// function interpret_question(these_terms)
-// {
-
-// }
