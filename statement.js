@@ -21,25 +21,30 @@ var randoSponse = [
     "you can say that again"
 ];
 
-function randOreply() {
-    return '>>' + randoSponse[0];
+function random(low, high) { //does not include 'high'
+    return Math.floor(Math.random() * (high - low) + low);
 }
 
-function tokenResponse(prTokens) {
+function randOreply() {
+    var the_number = random(0, randoSponse.length);
+    var the_response = randoSponse[the_number];
+    return '>>' + the_response;
+}
+
+function tokenResponse(folksy) {
     //last token prTokens.tokens[prTokens.tokens.length - 1];
     // console.log('--' + prTokens.tokens[0] + '--')
-    if (prTokens.tokens.length === 1) {
-        if (prTokens.tokens[0] === 'exit') {
+    if (folksy.tokens.length === 1) {
+        if (folksy.tokens[0] === 'exit') {
             return 'exit';
         }
     }
 
     //if there is a predicate
-    var pi = prTokens.predicateIndex();
-    if (pi) {
-        console.log('predicate index is ' + pi);
-    }
-
+    // var pi = folksy.predicateIndex();
+    // if (pi) {
+    //     console.log('predicate index is ' + pi);
+    // }
     return randOreply();
 }
 exports.tokenResponse = tokenResponse;

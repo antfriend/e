@@ -5,11 +5,11 @@
 			"name": "Launch",
 			"type": "node",
 			"request": "launch",
-			"program": "eg.js",
+			"program": "start.js",
 			"stopOnEntry": false,
 			"args": ["what","is","this","about"],
 			"cwd": ".",
-            "externalConsole": false,
+            "externalConsole": true,
 			"runtimeExecutable": null,
 			"runtimeArgs": [
 				"--nolazy"
@@ -23,8 +23,7 @@
 		{
 			"name": "Attach",
 			"type": "node",
-			"request": "attach",
-			"port": 5858
+			"request": "launch"
 		}
 	]
 }
