@@ -13,8 +13,34 @@ var domain = expert.Domain(),
     Concept = domain.Concept,
     Relation = domain.Relation;
 
+var randoSponse = [
+    "ok",
+    "thank you",
+    "you said it",
+    "fascinating...",
+    "you can say that again"
+];
+
+function randOreply() {
+    return '>>' + randoSponse[0];
+}
+
 function tokenResponse(prTokens) {
-    return prTokens.tokens[prTokens.tokens.length - 1];
+    //last token prTokens.tokens[prTokens.tokens.length - 1];
+    // console.log('--' + prTokens.tokens[0] + '--')
+    if (prTokens.tokens.length === 1) {
+        if (prTokens.tokens[0] === 'exit') {
+            return 'exit';
+        }
+    }
+
+    //if there is a predicate
+    var pi = prTokens.predicateIndex();
+    if (pi) {
+        console.log('predicate index is ' + pi);
+    }
+
+    return randOreply();
 }
 exports.tokenResponse = tokenResponse;
 

@@ -11,6 +11,7 @@
 var pr = require('./primary_representation.json'),
     statement = require('./statement.js'),
     question = require('./question.js');
+pr.tokens.length = 0; //initialize the array
 
 //start from a single string, for web or other use
 function string_to_pr(the_string) {
@@ -23,9 +24,7 @@ exports.string_to_pr = string_to_pr;
 function process_arguments(argumentatitves, console_or_not) {
     var start_position = 0;
     if (console_or_not) {
-        start_position = 2; //ignore the first two in the array for new cmd args
-    } else {
-        start_position = 0;
+        start_position = 2; //ignore the first two in the array for cmd args
     }
     pr.tokens.length = 0; //clear the array
     for (var i = start_position, len = argumentatitves.length; i < len; i++) {
