@@ -61,16 +61,14 @@ function process_arguments_inny(argumentatitves, console_or_not, callback) {
 }
 
 function process_tokens(callback) {
-    var response_message = '';
+    var response_object = {};
     if (pr.tokens) {
         if (pr.question === false) {
-            response_message = statement.tokenResponse(pr);
+            response_object = statement.tokenResponse(pr);
         } else {
-            response_message = question.tokenResponse(pr);
+            response_object = question.tokenResponse(pr);
         }
-
     }
-    callback(response_message);
+    
+    callback(response_object.message);
 }
-
-

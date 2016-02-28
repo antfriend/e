@@ -17,7 +17,7 @@ is stored as
 "predicate": "_isa",
 "object": "mamal"
 
-questions end in a "?" and will elicit a response
+questions end in a "?" will elicit a response
 
 >what _isa mamal?
 >>a bat

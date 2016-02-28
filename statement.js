@@ -7,7 +7,8 @@
 
 var pr = require('./primary_representation.json');
 var expert = require('expert'),
-    _ = require('underscore');
+    _ = require('underscore'),
+    S = require('string');
 
 var domain = expert.Domain(),
     Concept = domain.Concept,
@@ -32,39 +33,78 @@ function randOreply() {
 }
 
 function tokenResponse(pr) {
-    //last token prTokens.tokens[prTokens.tokens.length - 1];
-    // console.log('--' + prTokens.tokens[0] + '--')
+    var message = "";
     if (pr.tokens.length === 1) {
         if (pr.tokens[0] === 'exit') {
-            return 'exit';
+            return {
+                "message": "exit"//special exit message case
+            };
         }
     }
-
     //if there is a predicate
     var pi = predicateIndex(pr);
     if (pi) {
-        if(pi === 0)
-        {
+        if (pi === 0) {
             //this is an assertion about a predicate
-            
-        }else{
-            var subject = nameOfTokensFromTo(pr,0,pi);
-            var predicate  = pr.tokens[pi];
-            if(pi === pr.tokens.length -1)
-            {
+            message = "predicate " + pr.tokens[0] + ' affected';
+            return {
+                "message": message
+            };
+        } else {
+            var subject = nameOfTokensFromTo(pr, 0, pi);
+            var predicate = pr.tokens[pi];
+            if (pi === pr.tokens.length - 1) {
                 //no object
-                return "i don't know what you are talking about";
+                message = "i don't know what you are talking about";
+                return {
+                    "message": message
+                };
             }
-            var object = nameOfTokensFromTo(pr,pi+1,pr.tokens.length);
-            return 's:' + subject + ' p:' + predicate + ' 0:' + object;
+            var object = nameOfTokensFromTo(pr, pi + 1, pr.tokens.length);
+            var s = makeConcept(subject);
+            var p = makeRelationship(predicate);
+            var o = makeConcept(object);
+            //assertion
+            s[predicate](o);
+            message = 's:' + subject + ' p:' + predicate + ' o:' + object;
+            return {
+                "message": message,
+                "s": s,
+                "p": p,
+                "o": o
+            }
         }
+    } else {
+        message = randOreply();
+        return {
+            "message": message
+        };
     }
-    return randOreply();
 }
+
 exports.tokenResponse = tokenResponse;
 
-function nameOfTokensFromTo(pr, from, to)
-{
+function makeRelationship(naturalName) {
+    var new_relationship = Relation.create({
+        id: naturalName
+    });
+    return new_relationship;
+}
+
+function makeConcept(naturalName) {
+    var new_concept = Concept.create({
+        id: conceptName(naturalName)
+    });
+    return new_concept;
+}
+
+function conceptName(naturalName) {
+    var step1 = naturalName.trim();
+    var step2 = step1.replace(' ', '_')
+    return step2;
+}
+
+function nameOfTokensFromTo(pr, from, to) {
     var the_result = '';
     var array = pr.tokens;
     for (var index = from; index < to; index++) {
@@ -79,17 +119,13 @@ function predicateIndex(pr) {
     var the_i = 999;
     for (var index = 0; index < pr.tokens.length; index++) {
         var element = pr.tokens[index];
-        if(element[0] === '_')
-        {
+        if (element[0] === '_') {
             the_i = index;
         }
-    };
-    if(the_i === 999)
-    {
+    }
+    if (the_i === 999) {
         return null;
-    }else{
+    } else {
         return the_i;
     }
 }
-
-
