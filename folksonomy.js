@@ -25,19 +25,14 @@ function string_to_promise(the_string) {
 }
 exports.string_to_promise = string_to_promise;
 
-//take an array, return an array
-function process_arguments(argumentatitves, console_or_not) {
-
-}
-
 //start from a single string, for web or other use
-function string_to_pr(the_string) {
-    string_to_promise(the_string)
-        .then(function(the_response){
-            return the_response;
-        });
-}
-exports.string_to_pr = string_to_pr;
+// function string_to_pr(the_string) {
+//     string_to_promise(the_string)
+//         .then(function(the_response){
+//             return the_response;
+//         });
+// }
+// exports.string_to_pr = string_to_pr;
 
 //start from an array of terms for console or other use
 function process_arguments_inny(argumentatitves, console_or_not, callback) {
@@ -61,7 +56,7 @@ function process_arguments_inny(argumentatitves, console_or_not, callback) {
             pr.tokens.push(argumentatitves[i]);
         }
     }
-    process_tokens(function(response_message){
+    process_tokens(function(response_message) {
         callback(response_message);
     });
 }

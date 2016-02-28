@@ -28,7 +28,7 @@ function random(low, high) { //does not include 'high'
 function randOreply() {
     var the_number = random(0, randoSponse.length);
     var the_response = randoSponse[the_number];
-    return '>>' + the_response;
+    return the_response;
 }
 
 function tokenResponse(folksy) {
@@ -41,10 +41,10 @@ function tokenResponse(folksy) {
     }
 
     //if there is a predicate
-    // var pi = folksy.predicateIndex();
-    // if (pi) {
-    //     console.log('predicate index is ' + pi);
-    // }
+    var pi = folksy.predicateIndex();
+    if (pi) {
+        console.log('predicate index is ' + pi);
+    }
     return randOreply();
 }
 exports.tokenResponse = tokenResponse;

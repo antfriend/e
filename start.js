@@ -7,6 +7,7 @@
 var b = require('cmd_style');
 require('./primary_representation.json');
 var folk = require('./folksonomy.js');
+var colors = require('colors');
 const readline = require('readline');
 const rl = readline.createInterface({
     input: process.stdin,
@@ -29,30 +30,27 @@ function randOgreeter() {
     return something;
 }
 
-var incromonitor = 0;
-
-function loop(the_prompt) {
-    incromonitor++;
-    //console.log(incromonitor)
-    console.log(the_prompt);
-    rl.question('>', (the_response) => {
-
-        folk.string_to_promise(the_response)
-        .then(function(new_prompt){
-            if (new_prompt === 'exit') {
-                console.log('exiting, thank you for such a nice time!');
-                rl.close();
-                process.exit(0);
-            }
-            loop(new_prompt);
-            //return the_response;
-        });
-
- 
-
+function CLI_loop(the_prompt) {
+    rl.setPrompt('');
+    rl.prompt();
+    console.log(the_prompt.green);
+    rl.on('line', (line) => {
+        folk.string_to_promise(line.trim())
+            .then(function(new_prompt) {
+                if (new_prompt === 'exit') {
+                    console.log('exiting, thank you for such a nice time!'.green);
+                    rl.close();
+                    process.exit(0);
+                }
+                console.log(new_prompt.green);
+            });
+        rl.prompt();
+    }).on('close', () => {
+        console.log('Have a great day!'.green);
+        process.exit(0);
     });
 }
 
 b.box1('rapid\rfolksonomy\rbuilder');
 b.box1('"Ctrl+c" to end\rend with a "?" to make a question\rotherwise, just enter a statement');
-loop('*** ' + randOgreeter() + ' ***');
+CLI_loop('*** ' + randOgreeter() + ' ***');
