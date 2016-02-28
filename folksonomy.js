@@ -12,7 +12,6 @@ var pr = require('./primary_representation.json'),
     statement = require('./statement.js'),
     question = require('./question.js'),
     q = require("q");
-pr.tokens.length = 0; //initialize the array
 
 //take a string, return a string
 function string_to_promise(the_string) {
@@ -73,11 +72,5 @@ function process_tokens(callback) {
     }
     callback(response_message);
 }
-//exports.process_tokens = process_tokens;
 
-function predicateIndex() {
-    //token index of the first token that begins with a predicate indicator
 
-    return 3;
-}
-exports.predicateIndex = predicateIndex;

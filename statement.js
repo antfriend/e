@@ -31,35 +31,65 @@ function randOreply() {
     return the_response;
 }
 
-function tokenResponse(folksy) {
+function tokenResponse(pr) {
     //last token prTokens.tokens[prTokens.tokens.length - 1];
     // console.log('--' + prTokens.tokens[0] + '--')
-    if (folksy.tokens.length === 1) {
-        if (folksy.tokens[0] === 'exit') {
+    if (pr.tokens.length === 1) {
+        if (pr.tokens[0] === 'exit') {
             return 'exit';
         }
     }
 
     //if there is a predicate
-    var pi = folksy.predicateIndex();
+    var pi = predicateIndex(pr);
     if (pi) {
-        console.log('predicate index is ' + pi);
+        if(pi === 0)
+        {
+            //this is an assertion about a predicate
+            
+        }else{
+            var subject = nameOfTokensFromTo(pr,0,pi);
+            var predicate  = pr.tokens[pi];
+            if(pi === pr.tokens.length -1)
+            {
+                //no object
+                return "i don't know what you are talking about";
+            }
+            var object = nameOfTokensFromTo(pr,pi+1,pr.tokens.length);
+            return 's:' + subject + ' p:' + predicate + ' 0:' + object;
+        }
     }
     return randOreply();
 }
 exports.tokenResponse = tokenResponse;
 
+function nameOfTokensFromTo(pr, from, to)
+{
+    var the_result = '';
+    var array = pr.tokens;
+    for (var index = from; index < to; index++) {
+        var element = array[index];
+        the_result = the_result + element + ' ';
+    }
+    return the_result.trim();
+}
 
-// for (var i = 0, len = pr_tokens.tokens.length; i < len; i++) {
-//     //
-//     if (i === len - 1) //this is the last iteration
-//     {
-//         if (pr_tokens.question === true) {
-//             response_message = pr.tokens[0] + '?';
-//         } else {
-//             response_message = pr.tokens[i];
-//         }
-//     } else { //this is every iteration except the last
-//         console.log('working on ' + pr.tokens[i]);
-//     }
-// }
+function predicateIndex(pr) {
+    //token index of the first token that begins with a predicate indicator
+    var the_i = 999;
+    for (var index = 0; index < pr.tokens.length; index++) {
+        var element = pr.tokens[index];
+        if(element[0] === '_')
+        {
+            the_i = index;
+        }
+    };
+    if(the_i === 999)
+    {
+        return null;
+    }else{
+        return the_i;
+    }
+}
+
+
