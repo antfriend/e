@@ -2,7 +2,7 @@
 /*jshint esversion: 6 */
 "use strict";
 //
-//questions!
+//questions! for answers!
 //
 
 var pr = require('./primary_representation.json');
@@ -17,18 +17,18 @@ var domain = expert.Domain(),
 function tokenResponse(prTokens, folksy) {
     var pi = statement.predicateIndex(pr);
     var predicate = pr.tokens[pi];
-    
+
     var object = statement.nameOfTokensFromTo(pr, pi + 1, pr.tokens.length);
     var oname = statement.conceptName(object);
-    
+
     var thisPred = folksy.get_predicateById(predicate);
     var thisConcept = folksy.get_conceptById(oname);
-    
+
     var ans1 = thisPred(thisConcept);
     //var answer1 = whatHas(fur);
     var the_message = ans1[0].id;
     return {
-            "message": the_message
-        };
+        "message": the_message
+    };
 }
 exports.tokenResponse = tokenResponse;

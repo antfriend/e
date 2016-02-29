@@ -37,7 +37,7 @@ function tokenResponse(pr, folksy) {
     if (pr.tokens.length === 1) {
         if (pr.tokens[0] === 'exit') {
             return {
-                "message": "exit"//special exit message case
+                "message": "exit" //special exit message case
             };
         }
     }
@@ -75,7 +75,7 @@ function tokenResponse(pr, folksy) {
                 "s": s,
                 "p": p,
                 "o": o
-            }
+            };
         }
     } else {
         message = randOreply();

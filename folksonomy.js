@@ -13,54 +13,50 @@ var pr = require('./primary_representation.json'),
     q = require("q"),
     expert = require('expert'),
     _ = require('underscore');
-    
-var domain   = expert.Domain(),
-    Concept  = domain.Concept,
+
+var domain = expert.Domain(),
+    Concept = domain.Concept,
     Relation = domain.Relation;
 
-var i_am = this;
+var i_am = this; //possible strict violation?
 var concepts = [];
 var predicates = [];
 
-function get_concepts(){
+function get_concepts() {
     return concepts;
 }
 
-function get_predicates(){
+function get_predicates() {
     return predicates;
 }
 
-function get_predicateById(id){
+function get_predicateById(id) {
     var array = predicates;
     for (var index = 0; index < array.length; index++) {
         var element = array[index];
-        if(element.id === id)
-        {
+        if (element.id === id) {
             return element;
         }
     }
     return null;
 }
 
-function get_conceptById(id){
+function get_conceptById(id) {
     var array = concepts;
     for (var index = 0; index < array.length; index++) {
         var element = array[index];
-        if(element.id === id)
-        {
+        if (element.id === id) {
             return element;
         }
     }
     return null;
 }
 
-function add_concept_if_new(the_concept)
-{
+function add_concept_if_new(the_concept) {
     concepts.push(the_concept);
 }
 
-function add_predicate_if_new(the_predicate)
-{
+function add_predicate_if_new(the_predicate) {
     predicates.push(the_predicate);
 }
 
@@ -105,12 +101,12 @@ function process_tokens(callback) {
     var response_object = {};
     if (pr.tokens) {
         if (pr.question === false) {
-            response_object = statement.tokenResponse(pr,i_am);
+            response_object = statement.tokenResponse(pr, i_am);
         } else {
-            response_object = question.tokenResponse(pr,i_am);
+            response_object = question.tokenResponse(pr, i_am);
         }
     }
-    
+
     callback(response_object.message);
 }
 
