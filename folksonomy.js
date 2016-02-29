@@ -5,13 +5,64 @@
 //port of entry for building and querying a folksonomy
 //accepts a statement or question and returns a reply
 //input can be a string of terms, for use in a web interface, or the accompanying (start.js) interactive console
-//or as arguments to this module on the command line
 //
 
 var pr = require('./primary_representation.json'),
     statement = require('./statement.js'),
     question = require('./question.js'),
-    q = require("q");
+    q = require("q"),
+    expert = require('expert'),
+    _ = require('underscore');
+    
+var domain   = expert.Domain(),
+    Concept  = domain.Concept,
+    Relation = domain.Relation;
+
+var i_am = this;
+var concepts = [];
+var predicates = [];
+
+function get_concepts(){
+    return concepts;
+}
+
+function get_predicates(){
+    return predicates;
+}
+
+function get_predicateById(id){
+    var array = predicates;
+    for (var index = 0; index < array.length; index++) {
+        var element = array[index];
+        if(element.id === id)
+        {
+            return element;
+        }
+    }
+    return null;
+}
+
+function get_conceptById(id){
+    var array = concepts;
+    for (var index = 0; index < array.length; index++) {
+        var element = array[index];
+        if(element.id === id)
+        {
+            return element;
+        }
+    }
+    return null;
+}
+
+function add_concept_if_new(the_concept)
+{
+    concepts.push(the_concept);
+}
+
+function add_predicate_if_new(the_predicate)
+{
+    predicates.push(the_predicate);
+}
 
 //take a string, return a string
 function string_to_promise(the_string) {
@@ -22,16 +73,6 @@ function string_to_promise(the_string) {
     });
     return uhmDeferred.promise;
 }
-exports.string_to_promise = string_to_promise;
-
-//start from a single string, for web or other use
-// function string_to_pr(the_string) {
-//     string_to_promise(the_string)
-//         .then(function(the_response){
-//             return the_response;
-//         });
-// }
-// exports.string_to_pr = string_to_pr;
 
 //start from an array of terms for console or other use
 function process_arguments_inny(argumentatitves, console_or_not, callback) {
@@ -64,11 +105,19 @@ function process_tokens(callback) {
     var response_object = {};
     if (pr.tokens) {
         if (pr.question === false) {
-            response_object = statement.tokenResponse(pr);
+            response_object = statement.tokenResponse(pr,i_am);
         } else {
-            response_object = question.tokenResponse(pr);
+            response_object = question.tokenResponse(pr,i_am);
         }
     }
     
     callback(response_object.message);
 }
+
+exports.string_to_promise = string_to_promise;
+exports.get_concepts = get_concepts;
+exports.get_predicates = get_predicates;
+exports.add_concept_if_new = add_concept_if_new;
+exports.add_predicate_if_new = add_predicate_if_new;
+exports.get_predicateById = get_predicateById;
+exports.get_conceptById = get_conceptById;

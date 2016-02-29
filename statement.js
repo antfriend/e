@@ -32,7 +32,7 @@ function randOreply() {
     return the_response;
 }
 
-function tokenResponse(pr) {
+function tokenResponse(pr, folksy) {
     var message = "";
     if (pr.tokens.length === 1) {
         if (pr.tokens[0] === 'exit') {
@@ -66,6 +66,9 @@ function tokenResponse(pr) {
             var o = makeConcept(object);
             //assertion
             s[predicate](o);
+            folksy.add_predicate_if_new(p);
+            folksy.add_concept_if_new(o);
+            folksy.add_concept_if_new(s);
             message = 's:' + subject + ' p:' + predicate + ' o:' + object;
             return {
                 "message": message,
@@ -100,9 +103,11 @@ function makeConcept(naturalName) {
 
 function conceptName(naturalName) {
     var step1 = naturalName.trim();
-    var step2 = step1.replace(' ', '_')
+    //var step2 = step1.replace(' ', '_')
+    var step2 = S(step1).chompRight('?').s;
     return step2;
 }
+exports.conceptName = conceptName;
 
 function nameOfTokensFromTo(pr, from, to) {
     var the_result = '';
@@ -113,6 +118,7 @@ function nameOfTokensFromTo(pr, from, to) {
     }
     return the_result.trim();
 }
+exports.nameOfTokensFromTo = nameOfTokensFromTo;
 
 function predicateIndex(pr) {
     //token index of the first token that begins with a predicate indicator
@@ -129,3 +135,5 @@ function predicateIndex(pr) {
         return the_i;
     }
 }
+
+exports.predicateIndex = predicateIndex;
