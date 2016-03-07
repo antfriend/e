@@ -37,12 +37,24 @@ function CLI_loop(the_prompt) {
     rl.on('line', (line) => {
         folk.string_to_promise(line.trim())
             .then(function(new_prompt) {
-                if (new_prompt === 'exit') {
-                    console.log('exiting, thank you for such a nice time!'.green);
-                    rl.close();
-                    process.exit(0);
+                if (new_prompt.type) {
+                    if (new_prompt.type === folk.type.error) {
+                        console.log(new_prompt.message.red);
+                    }
+                    if (new_prompt.type === folk.type.object) {
+                        //parse the object
+                        console.log(new_prompt.message.blue);
+                        b.hr();
+                        b.tree(new_prompt.object);
+                    }
+                } else {
+                    if (new_prompt.message === 'exit') {
+                        console.log('exiting, thank you for such a nice time!'.green);
+                        rl.close();
+                        process.exit(0);
+                    }
+                    console.log(new_prompt.message.green);
                 }
-                console.log(new_prompt.green);
             });
         rl.prompt();
     }).on('close', () => {

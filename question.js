@@ -36,4 +36,3 @@ function tokenResponse(prTokens, folksy) {
 
 }
 exports.tokenResponse = tokenResponse;
-

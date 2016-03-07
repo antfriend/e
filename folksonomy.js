@@ -26,8 +26,9 @@ var type = {
     "error": "error",
     "question": "question",
     "statement": "statement",
-    "command": "command"
-}
+    "command": "command",
+    "object": "object"
+};
 
 // **************************************************************************************
 // * the main entry point for a string, returns a promise with an object.message string *
@@ -51,31 +52,31 @@ function process_arguments_inny(argumentatitves, console_or_not, callback) {
     if (console_or_not) {
         start_position = 2; //ignore the first two in the array for cmd args
     }
+    //clear the pr object state
     pr.tokens.length = 0; //clear the array
+    pr.type = null;
+    pr.message = "";
+
     for (var i = start_position, len = argumentatitves.length; i < len; i++) {
-        if(i === start_position)//this is the first term, duh
+        if (i === start_position) //this is the first term, duh
         {
-            if(this_is_a_keyword(argumentatitves[i]))
-            {
+            if (this_is_a_keyword(argumentatitves[i])) {
                 pr.type = type.command;
             }
         }
         if (i === len - 1) //this is the last iteration
         {
             if (argumentatitves[i].endsWith('?')) {
-                if(pr.type !== type.command)
-                {
+                if (pr.type !== type.command) {
                     pr.type = type.question;
                     //remove the ? from the last token
                     var justme = argumentatitves[i].substring(0, argumentatitves[i].length - 1);
                     pr.tokens.push(justme);
-                }
-                else{//it is a command - maybe we need that '?'
+                } else { //it is a command - maybe we need that '?'
                     pr.tokens.push(argumentatitves[i]);
                 }
             } else {
-                if(pr.type !== type.command)
-                {
+                if (pr.type !== type.command) {
                     pr.type = type.statement;
                 }
                 pr.tokens.push(argumentatitves[i]);
@@ -97,40 +98,38 @@ function process_tokens(callback) {
     if (pr.tokens) {
         if (pr.type === type.statement) {
             response_object = statement.tokenResponse(pr, i_am);
-        } 
-        if (pr.type === type.question){
+        }
+        if (pr.type === type.question) {
             response_object = question.tokenResponse(pr, i_am);
         }
-        if (pr.type === type.command){
+        if (pr.type === type.command) {
             response_object = command.tokenResponse(pr, i_am);
         }
-        if(pr.tokens.length === 1)
-        {
+        if (pr.tokens.length === 1) {
             //check if this is just an empty nothing
-            if (pr.type !== type.command)//not an already recognized command
+            if (pr.type !== type.command) //not an already recognized command
             {
                 //if this is a really short token it is assumed to be garbage
-                if(pr.tokens[0].length < 3)
-                {
+                if (pr.tokens[0].length < 3) {
                     response_object = error_response();
                 }
             }
         }
-    }else{
+    } else {
         response_object = error_response();
     }
-    callback(response_object.message);
+    callback(response_object);
 }
 
-function error_response(){
-    return {"message": "what are you trying to say?",
-                            "status": "error"}
+function error_response() {
+    return {
+        "message": "what are you trying to say?",
+        "type": "error"
+    };
 }
 
-function this_is_a_keyword(the_word)
-{
-    if(the_word === 'folksonomy')
-    {
+function this_is_a_keyword(the_word) {
+    if (the_word === 'folksonomy') {
         return true;
     }
     return false;
@@ -181,3 +180,4 @@ exports.add_concept_if_new = add_concept_if_new;
 exports.add_predicate_if_new = add_predicate_if_new;
 exports.get_predicateById = get_predicateById;
 exports.get_conceptById = get_conceptById;
+exports.type = type;
