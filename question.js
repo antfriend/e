@@ -23,12 +23,17 @@ function tokenResponse(prTokens, folksy) {
 
     var thisPred = folksy.get_predicateById(predicate);
     var thisConcept = folksy.get_conceptById(oname);
+    try {
+        var ans1 = thisPred(thisConcept);
+        //var answer1 = whatHas(fur);
+        var the_message = ans1[0].id;
+        return {
+            "message": the_message
+        };
+    } catch (error) {
+        return {"message": "i can't answer that"};
+    }
 
-    var ans1 = thisPred(thisConcept);
-    //var answer1 = whatHas(fur);
-    var the_message = ans1[0].id;
-    return {
-        "message": the_message
-    };
 }
 exports.tokenResponse = tokenResponse;
+
