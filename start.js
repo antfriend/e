@@ -1,17 +1,19 @@
 /*jslint node: true */
 /*jshint esversion: 6 */
 "use strict";
-//
+// 
 //folksonomy console interface
 //
-var b = require('cmd_style');
 require('./primary_representation.json');
-var folk = require('./folksonomy.js');
-var colors = require('colors');
-const readline = require('readline');
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
+var express = require('express'),
+    b = require('cmd_style'),
+    folk = require('./folksonomy.js'),
+    website = require('./server/site.js'),
+    colors = require('colors'),
+    readline = require('readline'),
+    rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
 });
 
 var randOgreetings = [
@@ -65,4 +67,5 @@ function CLI_loop(the_prompt) {
 
 b.box1('rapid\rfolksonomy\rbuilder');
 b.box1('"Ctrl+c" to end\rend with a "?" to make a question\rotherwise, just enter a statement');
+website.start(folk);
 CLI_loop('*** ' + randOgreeter() + ' ***');

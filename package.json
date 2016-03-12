@@ -3,13 +3,15 @@
     "version": "0.1.5",
     "description": "a fun thing for building a folksonomy or taxonomy",
     "main": "start.js",
+    "port": 404,
     "dependencies": {
         "cmd_style": "x.x",
         "expert": "x.x",
         "underscore": "x.x",
         "string": "x.x",
         "q": "^1.4.1",
-        "colors": "x.x"
+      "colors": "x.x",
+      "express": "x.x"
     },
     "engines": {
         "node": "0.12.7"
@@ -17,11 +19,11 @@
     "license": "MIT",
     "devDependencies": {},
     "scripts": {
-        "test": "node eg test"
+        "test": "node folksonomy"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/antfriend/e.git"
+        "url": "https://github.com/antfriend/e.git"
     },
     "keywords": [
         "rapid",

@@ -1,0 +1,2 @@
+C:\heroku\folksonomy\obj\Debug\folksonomy.njsprojResolveAssemblyReference.cache
+C:\heroku\folksonomy\bin\Microsoft.NodejsTools.WebRole.dll

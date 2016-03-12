@@ -50,7 +50,7 @@ function string_to_promise(the_string) {
 function process_arguments_inny(argumentatitves, console_or_not, callback) {
     var start_position = 0;
     if (console_or_not) {
-        start_position = 2; //ignore the first two in the array for cmd args
+        start_position = 3; //ignore the first two in the array for cmd args
     }
     //clear the pr object state
     pr.tokens.length = 0; //clear the array
@@ -173,6 +173,34 @@ function add_predicate_if_new(the_predicate) {
     predicates.push(the_predicate);
 }
 
+// ****************
+// * other stuff  *
+// ****************
+function test(args) {
+    //console.log('testing ' + args[3]);
+    process_arguments_inny(args, true, function(response) {
+        console.log(response.message);
+    });
+}
+
+function cmd_test_startup() {
+    var c = process.argv;
+    if (c.length > 2) {
+        if (c[2] === 'test') { //if started from the command line with the argument 'test' then the sample test script will run
+            if (c.length > 3) {
+                test(c);
+            } else {
+                console.log('use this command to enter a statement for processing ');
+                console.log('for example: ');
+                console.log('>node folksonomy test oranges _are_a fruit ');
+            }
+        }
+    }
+}
+
+// ****************
+// * public       *
+// ****************
 exports.string_to_promise = string_to_promise;
 exports.get_concepts = get_concepts;
 exports.get_predicates = get_predicates;
@@ -181,3 +209,8 @@ exports.add_predicate_if_new = add_predicate_if_new;
 exports.get_predicateById = get_predicateById;
 exports.get_conceptById = get_conceptById;
 exports.type = type;
+
+// ****************
+// * cmd test     *
+// ****************
+cmd_test_startup(this);
