@@ -44,7 +44,7 @@ function tokenResponse(pr, folksy) {
     //if there is a predicate
     var pi = predicateIndex(pr);
     if (pi) {
-        if (pi === 0) {
+        if (pi == 0) {
             //this is an assertion about a predicate
             message = "predicate " + pr.tokens[0] + ' affected';
             return {
@@ -64,11 +64,14 @@ function tokenResponse(pr, folksy) {
             var s = makeConcept(subject);
             var p = makeRelationship(predicate);
             var o = makeConcept(object);
-            //assertion
-            s[predicate](o);
+            
             folksy.add_predicate_if_new(p);
             folksy.add_concept_if_new(o);
             folksy.add_concept_if_new(s);
+            //add triple if new
+            o[predicate](s);
+            folksy.add_triple_if_new(o);
+
             message = 's:' + subject + ' p:' + predicate + ' o:' + object;
             return {
                 "message": message,

@@ -26,7 +26,10 @@ function tokenResponse(prTokens, folksy) {
     try {
         var ans1 = thisPred(thisConcept);
         //var answer1 = whatHas(fur);
-        var the_message = ans1[0].id;
+        var the_message = "";
+        for (var i = 0; i < ans1.length; i++) {
+            the_message+= ans1[i].id + ", ";
+        }
         return {
             "message": the_message
         };

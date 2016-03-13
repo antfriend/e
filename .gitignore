@@ -48,3 +48,4 @@ Temporary Items
 .ntvs_*
 /node_modules
 .ntvs_analysis.dat
+/obj

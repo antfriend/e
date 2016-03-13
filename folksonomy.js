@@ -7,10 +7,10 @@
 //input can be a string of terms, for use in a web interface, or the accompanying (start.js) interactive console
 //
 
-var pr = require('./primary_representation.json'),
-    statement = require('./statement.js'),
-    question = require('./question.js'),
-    command = require('./command.js'),
+var pr = require('./processors/primary_representation.json'),
+    statement = require('./processors/statement.js'),
+    question = require('./processors/question.js'),
+    command = require('./processors/command.js'),
     q = require("q"),
     expert = require('expert'),
     _ = require('underscore');
@@ -144,33 +144,77 @@ function get_predicates() {
 }
 
 function get_predicateById(id) {
-    var array = predicates;
-    for (var index = 0; index < array.length; index++) {
-        var element = array[index];
-        if (element.id === id) {
-            return element;
-        }
+    var the_index = index_of_predicate(id);
+    if (the_index === -1) {
+        return predicates[the_index];
     }
     return null;
 }
 
 function get_conceptById(id) {
-    var array = concepts;
-    for (var index = 0; index < array.length; index++) {
-        var element = array[index];
-        if (element.id === id) {
-            return element;
-        }
+    var the_index = index_of_concept(id);
+    if (the_index === -1) {
+        return concepts[the_index];
     }
     return null;
 }
 
-function add_concept_if_new(the_concept) {
-    concepts.push(the_concept);
+function index_of_concept(id) {
+    for (var i = 0; i < concepts.length; i++) {
+        if (id === concepts[i].id) {
+            return i;
+        }
+    }
+    return -1;//notfound
 }
 
+function index_of_predicate(id) {
+    for (var i = 0; i < predicates.length; i++) {
+        if (id === predicates[i].id) {
+            return i;
+        }
+    }
+    return -1;//notfound
+}
+
+function add_concept_if_new(the_concept) {
+    var the_index = index_of_concept(the_concept.id);
+    if (the_index === -1) {
+        concepts.push(the_concept);
+    }
+    //else {
+    //    var the_concepts_concept = concepts[the_index];
+    //    if (the_concept === the_concepts_concept) {
+    //        return;
+    //    } else {
+    //        //merge them
+    //        add_to_predicates_if_needed();
+    //        concepts.push(the_concept);
+    //    }
+    //}
+}
+
+function add_triple_if_new(the_object) {
+    //get the concept
+
+    //check if it already has this predicate => subject
+
+
+}
+
+//function add_to_predicates_if_needed() {
+//    var the_index = index_of_predicate(the_concept.id);
+//    if (the_index === -1) {
+//        concepts.push(the_concept);
+//    }
+//    console.log("add to predicates if needed");
+//}
+
 function add_predicate_if_new(the_predicate) {
-    predicates.push(the_predicate);
+    var the_index = index_of_predicate(the_predicate.id);
+    if (the_index === -1) {
+        predicates.push(the_predicate);
+    }
 }
 
 // ****************
@@ -205,6 +249,7 @@ exports.string_to_promise = string_to_promise;
 exports.get_concepts = get_concepts;
 exports.get_predicates = get_predicates;
 exports.add_concept_if_new = add_concept_if_new;
+exports.add_predicate_if_new = add_predicate_if_new;
 exports.add_predicate_if_new = add_predicate_if_new;
 exports.get_predicateById = get_predicateById;
 exports.get_conceptById = get_conceptById;

@@ -4,7 +4,7 @@
 // 
 //folksonomy console interface
 //
-require('./primary_representation.json');
+require('./processors/primary_representation.json');
 var express = require('express'),
     b = require('cmd_style'),
     folk = require('./folksonomy.js'),

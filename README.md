@@ -13,17 +13,17 @@ a rapid taxonomy, folksonomy builder
 
 start entering your taxonomy terms
 like:
->a bat _isa mamal
+>a bat _isa mammal
 
 is stored as
 
 "subject": "a bat",
 "predicate": "_isa",
-"object": "mamal"
+"object": "mammal"
 
 questions end in a "?" will elicit a response
 
->what _isa mamal?
+>what _isa mammal?
 >>a bat
 
 the underscore "_" starts a predicate.  A space ends a predicate.

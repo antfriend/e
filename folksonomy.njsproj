@@ -20,18 +20,19 @@
   <ItemGroup>
     <Content Include=".gitignore" />
     <Content Include="package.json" />
-    <Content Include="primary_representation.json" />
+    <Content Include="processors\primary_representation.json" />
     <Content Include="README.md" />
-    <Compile Include="command.js" />
+    <Compile Include="processors\command.js" />
     <Compile Include="example.js" />
     <Compile Include="folksonomy.js" />
-    <Compile Include="question.js" />
+    <Compile Include="processors\question.js" />
     <Compile Include="server\site.js" />
     <Compile Include="start.js" />
-    <Compile Include="statement.js" />
+    <Compile Include="processors\statement.js" />
     <Content Include="sample_script.json" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="processors\" />
     <Folder Include="server\" />
     <Folder Include="server\public\" />
   </ItemGroup>
