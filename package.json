@@ -1,8 +1,8 @@
 {
     "name": "folksonomy",
-    "version": "0.1.5",
+    "version": "0.2.2",
     "description": "a fun thing for building a folksonomy or taxonomy",
-    "main": "start.js",
+    "main": "folksonomy.js",
     "port": 404,
     "dependencies": {
         "cmd_style": "x.x",
@@ -14,7 +14,7 @@
       "express": "x.x"
     },
     "engines": {
-        "node": "0.12.7"
+        "node": "x.x"
     },
     "license": "MIT",
     "devDependencies": {},
@@ -36,5 +36,6 @@
     "bugs": {
         "url": "https://github.com/antfriend/e/issues"
     },
-    "homepage": "https://github.com/antfriend/e#readme"
+  "homepage": "https://github.com/antfriend/e#readme",
+  "tonicExampleFilename": "example.js"
 }

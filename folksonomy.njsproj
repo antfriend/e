@@ -19,10 +19,12 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Content Include=".gitignore" />
     <Content Include="package.json" />
     <Content Include="primary_representation.json" />
     <Content Include="README.md" />
     <Compile Include="command.js" />
+    <Compile Include="example.js" />
     <Compile Include="folksonomy.js" />
     <Compile Include="question.js" />
     <Compile Include="server\site.js" />
