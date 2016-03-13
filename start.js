@@ -65,7 +65,33 @@ function CLI_loop(the_prompt) {
     });
 }
 
-b.box1('rapid\rfolksonomy\rbuilder');
-b.box1('"Ctrl+c" to end\rend with a "?" to make a question\rotherwise, just enter a statement');
-website.start(folk);
-CLI_loop('*** ' + randOgreeter() + ' ***');
+function start_console() {
+    b.box1('rapid\rfolksonomy\rbuilder');
+    b.box1('"Ctrl+c" to end\rend with a "?" to make a question\rotherwise, just enter a statement');
+    CLI_loop('*** ' + randOgreeter() + ' ***');
+}
+
+function start() {
+
+    website.start(folk);
+    start_console();
+}
+
+function cmd_test_startup() {
+    var the_argument_following_process_start_arguments = 3;
+    var the_argument = 2;
+    var c = process.argv;
+    if (c.length === the_argument_following_process_start_arguments)//exactly one please
+    {
+        if (c[the_argument] === 'start') { //if started from the command line with the argument 'test' then the sample test script will run
+            start();
+        }
+    }
+}
+
+exports.start = start;
+
+// ****************
+// * cmd test     *
+// ****************
+cmd_test_startup();

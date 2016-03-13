@@ -2,7 +2,7 @@
     "name": "folksonomy",
     "version": "0.2.2",
     "description": "a fun thing for building a folksonomy or taxonomy",
-    "main": "folksonomy.js",
+    "main": "start.js",
     "port": 404,
     "dependencies": {
         "cmd_style": "x.x",

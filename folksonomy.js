@@ -213,4 +213,4 @@ exports.type = type;
 // ****************
 // * cmd test     *
 // ****************
-cmd_test_startup(this);
+cmd_test_startup();

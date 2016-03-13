@@ -9,6 +9,15 @@ var pak = require('../package.json'),
 var app = express();
 var _folksonomy = {};
 
+app.get('/', function (req, res) {
+    var my_root = "http://localhost:" + pak.port;
+    var blarg = {
+        "concepts": my_root + "/concepts",
+        "settings": my_root + "/settings"
+    };
+    res.send(blarg);
+});
+
 app.get('/settings', function (req, res) {
     res.send(pak);
 });

@@ -2,10 +2,14 @@
 # folksonomy
 
 a rapid taxonomy, folksonomy builder
-(in development - check back later)
 
-to play with the interactive console, execute
->node start.js
+// *~~-
+// *~~- folksy.start() launches a web api to access and use your folksonomy
+// *~~- and launches a CLI for you to build your folksonomy
+// *~~- folksonomy remembers all
+// *~~-
+var folksy = require('folksonomy');
+folksy.start();
 
 start entering your taxonomy terms
 like:

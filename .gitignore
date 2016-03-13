@@ -47,3 +47,4 @@ Temporary Items
 .apdisk
 .ntvs_*
 /node_modules
+.ntvs_analysis.dat
