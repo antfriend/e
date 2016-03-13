@@ -71,11 +71,42 @@ function start_console() {
     CLI_loop('*** ' + randOgreeter() + ' ***');
 }
 
-function start() {
+function start_with_sample() {
+    var script = require('./sample_script.json');
+    load_script(script, function() {
+        start();
+    });
+}
 
+function start() {
     website.start(folk);
     start_console();
 }
+
+function load_script(json_array, callback) {
+    console.log('LOADING SCRIPT!');
+    var times_called = 0;
+    var the_length = json_array.length;
+    for (var i = 0; i < the_length; i++) {
+        can_do_it(json_array[i]);
+    }
+    function can_do_it(statement) {
+        folk.string_to_promise(statement.trim())
+            .then(function (new_prompt) 
+                {
+                console.log(JSON.stringify({ "folking": statement }));
+                console.log(JSON.stringify(new_prompt));
+                times_called++;
+                if (times_called === the_length) {
+                    console.log('SCRIPT LOADED!');
+                    callback();
+                }
+            });
+    }
+}
+
+exports.start = start;
+exports.load_script = load_script;
 
 function cmd_test_startup() {
     var the_argument_following_process_start_arguments = 3;
@@ -84,12 +115,10 @@ function cmd_test_startup() {
     if (c.length === the_argument_following_process_start_arguments)//exactly one please
     {
         if (c[the_argument] === 'start') { //if started from the command line with the argument 'test' then the sample test script will run
-            start();
+            start_with_sample();
         }
     }
 }
-
-exports.start = start;
 
 // ****************
 // * cmd test     *

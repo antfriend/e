@@ -29,6 +29,7 @@
     <Compile Include="server\site.js" />
     <Compile Include="start.js" />
     <Compile Include="statement.js" />
+    <Content Include="sample_script.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="server\" />
