@@ -145,7 +145,7 @@ function get_predicates() {
 
 function get_predicateById(id) {
     var the_index = index_of_predicate(id);
-    if (the_index === -1) {
+    if (the_index !== -1) {
         return predicates[the_index];
     }
     return null;
@@ -153,7 +153,7 @@ function get_predicateById(id) {
 
 function get_conceptById(id) {
     var the_index = index_of_concept(id);
-    if (the_index === -1) {
+    if (the_index !== -1) {
         return concepts[the_index];
     }
     return null;
@@ -171,7 +171,7 @@ function index_of_concept(id) {
 function index_of_predicate(id) {
     for (var i = 0; i < predicates.length; i++) {
         if (id === predicates[i].id) {
-            return i;
+            return i;  
         }
     }
     return -1;//notfound
@@ -194,11 +194,19 @@ function add_concept_if_new(the_concept) {
     //}
 }
 
-function add_triple_if_new(the_object) {
+function add_triple_if_new(o, predicate,s) {
     //get the concept
-
+    var o_existing = get_conceptById(o.id);
+    if (o_existing) {
+        
+    } else {
+        console.log('wrong, it should be there');
+    }
     //check if it already has this predicate => subject
+    
 
+    //add it
+    o_existing[predicate](s);
 
 }
 
@@ -250,10 +258,11 @@ exports.get_concepts = get_concepts;
 exports.get_predicates = get_predicates;
 exports.add_concept_if_new = add_concept_if_new;
 exports.add_predicate_if_new = add_predicate_if_new;
-exports.add_predicate_if_new = add_predicate_if_new;
+exports.add_triple_if_new = add_triple_if_new;
 exports.get_predicateById = get_predicateById;
 exports.get_conceptById = get_conceptById;
 exports.type = type;
+
 
 // ****************
 // * cmd test     *

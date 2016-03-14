@@ -28,11 +28,14 @@ function tokenResponse(prTokens, folksy) {
         //var answer1 = whatHas(fur);
         var the_message = "";
         for (var i = 0; i < ans1.length; i++) {
-            the_message+= ans1[i].id + ", ";
+            the_message += ans1[i].id + " ";
+        }
+        if (the_message.length > 2) {
+            the_message = the_message.trim();
         }
         return {
             "message": the_message
-        };
+    };
     } catch (error) {
         return {"message": "i can't answer that"};
     }
