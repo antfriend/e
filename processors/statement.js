@@ -68,8 +68,6 @@ function tokenResponse(pr, folksy) {
             folksy.add_predicate_if_new(p);
             folksy.add_concept_if_new(o);
             folksy.add_concept_if_new(s);
-            //add triple if new
-            o[predicate](s);
             folksy.add_triple_if_new(o, predicate, s);
 
             message = 's:' + subject + ' p:' + predicate + ' o:' + object;

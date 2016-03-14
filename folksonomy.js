@@ -182,41 +182,23 @@ function add_concept_if_new(the_concept) {
     if (the_index === -1) {
         concepts.push(the_concept);
     }
-    //else {
-    //    var the_concepts_concept = concepts[the_index];
-    //    if (the_concept === the_concepts_concept) {
-    //        return;
-    //    } else {
-    //        //merge them
-    //        add_to_predicates_if_needed();
-    //        concepts.push(the_concept);
-    //    }
-    //}
 }
 
 function add_triple_if_new(o, predicate,s) {
     //get the concept
     var o_existing = get_conceptById(o.id);
-    if (o_existing) {
+    //if (o_existing) {
         
-    } else {
-        console.log('wrong, it should be there');
-    }
-    //check if it already has this predicate => subject
+    //} else {
+    //    console.log('wrong, it should be there');
+    //}
+    //TODO: check if it already has this predicate => subject
     
 
     //add it
     o_existing[predicate](s);
 
 }
-
-//function add_to_predicates_if_needed() {
-//    var the_index = index_of_predicate(the_concept.id);
-//    if (the_index === -1) {
-//        concepts.push(the_concept);
-//    }
-//    console.log("add to predicates if needed");
-//}
 
 function add_predicate_if_new(the_predicate) {
     var the_index = index_of_predicate(the_predicate.id);

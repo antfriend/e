@@ -39,6 +39,5 @@ function tokenResponse(prTokens, folksy) {
     } catch (error) {
         return {"message": "i can't answer that"};
     }
-
 }
 exports.tokenResponse = tokenResponse;
