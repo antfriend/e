@@ -65,10 +65,11 @@ function tokenResponse(pr, folksy) {
             var p = makeRelationship(predicate);
             var o = makeConcept(object);
             
+            //add to the folksy context if new
             folksy.add_predicate_if_new(p);
             folksy.add_concept_if_new(o);
             folksy.add_concept_if_new(s);
-            folksy.add_triple_if_new(o, predicate, s);
+            folksy.add_triple_if_new(o, p, s);
 
             message = 's:' + subject + ' p:' + predicate + ' o:' + object;
             return {

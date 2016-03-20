@@ -24,9 +24,13 @@ function tokenResponse(prTokens, folksy) {
     var thisPred = folksy.get_predicateById(predicate);
     var thisConcept = folksy.get_conceptById(oname);
     try {
-        var ans1 = thisPred(thisConcept);
-        //var answer1 = whatHas(fur);
         var the_message = "";
+        var ans1 = thisPred(thisConcept);
+        if (ans1.length === 0) {
+            the_message = thisConcept.id + " " + thisPred.id + " nothing";
+        }
+        //var answer1 = whatHas(fur);
+        
         for (var i = 0; i < ans1.length; i++) {
             the_message += ans1[i].id + " ";
         }

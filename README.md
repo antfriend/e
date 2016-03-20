@@ -17,9 +17,9 @@ like:
 
 is stored as
 
-"subject": "a bat",
-"predicate": "_isa",
-"object": "mammal"
+   "subject": "a bat",
+   "predicate": "_isa",
+   "object": "mammal"
 
 questions end in a "?" will elicit a response
 
@@ -27,3 +27,10 @@ questions end in a "?" will elicit a response
 >>a bat
 
 the underscore "_" starts a predicate.  A space ends a predicate.
+
+   I _am_like myself
+   I _am me
+   I _am what I am
+   what _am I?
+
+returns ... find out for yourself!

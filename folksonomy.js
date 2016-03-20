@@ -184,7 +184,8 @@ function add_concept_if_new(the_concept) {
     }
 }
 
-function add_triple_if_new(o, predicate,s) {
+function add_triple_if_new(o, p, s) {
+    var predicate = p.id;
     //get the concept
     var o_existing = get_conceptById(o.id);
     //if (o_existing) {
@@ -196,7 +197,7 @@ function add_triple_if_new(o, predicate,s) {
     
 
     //add it
-    o_existing[predicate](s);
+    o_existing[predicate](s);//does this just work?
 
 }
 
