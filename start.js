@@ -83,6 +83,11 @@ function start() {
     start_console();
 }
 
+function start_with_app(the_app_to_use) {
+    website.start_with_app(the_app_to_use, folk);
+    //start_console();
+}
+
 function load_script(json_array, callback) {
     console.log('LOADING SCRIPT!');
     var times_called = 0;
@@ -106,6 +111,7 @@ function load_script(json_array, callback) {
 }
 
 exports.start = start;
+exports.start_with_express_app = start_with_app;
 exports.load_script = load_script;
 
 function cmd_test_startup() {
