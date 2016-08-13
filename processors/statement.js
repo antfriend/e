@@ -8,7 +8,8 @@
 var pr = require('./primary_representation.json');
 var expert = require('expert'),
     _ = require('underscore'),
-    S = require('string');
+    S = require('string'),
+    solr = require('../solr/solr.js');
 
 var domain = expert.Domain(),
     Concept = domain.Concept,
@@ -72,12 +73,14 @@ function tokenResponse(pr, folksy) {
             folksy.add_triple_if_new(o, p, s);
 
             message = 's:' + subject + ' p:' + predicate + ' o:' + object;
-            return {
+            var bottledMessage = {
                 "message": message,
                 "s": s,
                 "p": p,
                 "o": o
             };
+            solrSync(bottledMessage);
+            return bottledMessage;
         }
     } else {
         message = randOreply();
@@ -88,6 +91,25 @@ function tokenResponse(pr, folksy) {
 }
 
 exports.tokenResponse = tokenResponse;
+
+function solrSync(bottledMessage) {
+    /*      var bottledMessage = {
+                "message": message,
+                "s": s,
+                "p": p,
+                "o": o
+            };
+    */
+    //add this message to solr
+    
+    solr.flush([solr.formatStatementMessage(bottledMessage)], function(nay, yea) {
+        if (nay) {
+            console.log(nay);
+        }
+    });
+}
+
+
 
 function makeRelationship(naturalName) {
     var new_relationship = Relation.create({
