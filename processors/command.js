@@ -17,32 +17,40 @@ var domain = expert.Domain(),
 function tokenResponse(prTokens, folksy) {
     var the_command = pr.tokens[0];
     if (the_command === 'folksonomy') {
+        var return_message = {
+            "message": "FOLKSONOMY",
+            "type": folksy.type.object,
+            "object": {
+                "concepts": folksy.get_concepts(),
+                "predicates": folksy.get_predicates()
+            }
+        };
         //if this is the only command
         if (pr.tokens.length === 1) {
             //return everything
-            var return_message = {
-                "message": "FOLKSONOMY",
-                "type": folksy.type.object,
-                "object": {
-                    "concepts": folksy.get_concepts(),
-                    "predicates": folksy.get_predicates()
-                }
-            };
+
             return return_message;
+        } else {
+            //handle the command
+            
+
+            return_message.message = "ha ha, you said, " + pr.tokens[1];
+            return return_message;
+
+        }
+    } else {
+        try {
+            return {
+                
+                "message": "ha ha, you said, " + the_command
+            };
+
+        } catch (error) {
+            return {
+                "type": folksy.type.error,
+                "message": "ha ha, you said, " + the_command
+            };
         }
     }
-    try {
-        return {
-            
-            "message": "ha ha, you said, " + the_command
-        };
-
-    } catch (error) {
-        return {
-            "type": folksy.type.error,
-            "message": "ha ha, you said, " + the_command
-        };
-    }
-
 }
 exports.tokenResponse = tokenResponse;
