@@ -29,11 +29,17 @@ questions end in a "?" will elicit a response
 the underscore "_" starts a predicate.  A space ends a predicate.
 
 >I _am_like myself
+
 >I _am me
+
 >I _am what I am
+
 >what _am I?
+
 >>[try it to find out]
+
 >what _am what I am?
+
 >>[try it to find out]
 
 returns ... find out for yourself!
