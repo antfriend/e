@@ -1,0 +1,13 @@
+#set($variable_s = $doc.getFieldValue('variable_s'))
+<div class="result-title">
+	<b>VAR </b>
+	<a href="#url_for_facet_filter('variable_s', $variable_s)">#field('variable_s')</a>
+	<b>#field('command_s')</b>
+	<a href="http://localhost:52991/Home/">Noo! BBS!S</a>
+
+</div>
+
+<div>Command:: #field('command_s')</div>
+
+
+#parse('debug.vm')

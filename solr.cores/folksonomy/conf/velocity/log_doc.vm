@@ -1,0 +1,39 @@
+#**
+ *  Render a hit representing a Product
+ *  assumed to have a field called "user_s"
+ *#
+#set($user_s = $doc.getFieldValue('user_s'))
+#set($duration_l = $doc.getFieldValue('duration_l'))
+
+<div class="result-title" style="color:#999;">
+	<a style="color:#999;" href="#url_for_facet_filter('user_s', $user_s)">#field('user_s')</a>&nbsp;|&nbsp;
+	<b>#field('timestamp_dt')</b>&nbsp;
+	|&nbsp;<a style="color:#999;" href="#url_for_facet_range_filter('duration_l', $duration_l)">#field('duration_l')</a>
+	
+</div>
+
+<div>&gt;$doc.getFieldValue('command_s')</div>
+<div style='width:640px'>
+	<pre>$doc.getFieldValue('result_s')</pre>
+</div>
+
+
+<div class="mlt">
+  #set($mlt = $mltResults.get($docId))
+  #set($mltOn = $params.getBool('mlt'))
+  #if($mltOn == true)<div class="field-name">Similar Items</div>#end
+  #if ($mltOn && $mlt && $mlt.size() > 0)
+  <ul>
+    #foreach($mltHit in $mlt)
+      #set($mltId = $mltHit.getFieldValue('id'))
+      <li><div><a href="#url_for_home?q=id:$mltId">$mltId</a></div><div><span class="field-name">Name:</span> $mltHit.getFieldValue('name')</div>
+        <div><span class="field-name">Price:</span> $!number.currency($mltHit.getFieldValue('price')) <span class="field-name">In Stock:</span> $mltHit.getFieldValue('inStock')</div>
+
+      </li>
+    #end
+  </ul>
+  #elseif($mltOn && $mlt.size() == 0)
+    <div>No Similar Items Found</div>
+  #end
+</div>
+#parse('debug.vm')

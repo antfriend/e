@@ -1,0 +1,35 @@
+#**
+ *  Called for each matching document but then
+ *  calls one of product_doc, join_doc or richtext_doc
+ *  depending on which fields the doc has
+ *#
+
+#set($docId = $doc.getFieldValue('id'))
+
+<div class="result-document">
+
+  #if($doc.getFieldValue('duration_l'))
+    #parse("log_doc.vm")
+
+  #elseif($doc.getFieldValue('variable_s'))
+    #parse("variable_doc.vm")
+
+  #elseif($doc.getFieldValue('jwt_s'))
+    #parse("jwtn_doc.vm")
+
+
+
+  #elseif($doc.getFieldValue('id'))
+    #parse("basic_doc.vm")
+
+  ## Has a "compName_s" field ?
+  #elseif($doc.getFieldValue('compName_s'))
+    #parse("join_doc.vm")
+
+  ## Fallback to richtext_doc
+  #else
+    #parse("richtext_doc.vm")
+
+  #end
+
+</div>
