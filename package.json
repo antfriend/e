@@ -1,6 +1,6 @@
 {
     "name": "folksonomy",
-    "version": "0.3.5",
+    "version": "0.3.6",
     "description": "a fun thing for building a folksonomy or taxonomy",
     "main": "start.js",
     "port": 404,
@@ -41,6 +41,7 @@
   "tonicExampleFilename": "example.js",
   "solr": {
     "serverInst": "localhost",
-    "coreInst":  "folksonomy"
+    "coreInst": "folksonomy",
+    "isRunning":  false
   }
 }

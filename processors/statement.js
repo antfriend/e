@@ -10,6 +10,7 @@ var expert = require('expert'),
     _ = require('underscore'),
     S = require('string'),
     solr = require('../solr/solr.js');
+    //pak = require('../package.json');
 
 var domain = expert.Domain(),
     Concept = domain.Concept,
@@ -100,11 +101,13 @@ function solrSync(bottledMessage) {
                 "o": o
             };
     */
-    //add this message to solr
+    //add this message to solr+
     
     solr.flush([solr.formatStatementMessage(bottledMessage)], function(nay, yea) {
         if (nay) {
             console.log(nay);
+        } else {
+            console.log(yea);
         }
     });
 }

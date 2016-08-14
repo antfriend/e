@@ -10,6 +10,14 @@ var app = express();
 var _folksonomy = {};
 var _approot = "/folksonomy";
 
+function root_handler(req, res) {
+    var blarg = {
+        "folksonomy": "http://localhost:404/folksonomy",
+        "log": "http://localhost:8983/solr/folksonomy/browse"
+    };
+    res.send(blarg);
+}
+app.get('/', root_handler);
 app.get(_approot, function (req, res) {
     var my_root = "http://localhost:" + pak.port + _approot;
     var blarg = {
