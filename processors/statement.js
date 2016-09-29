@@ -107,7 +107,7 @@ function solrSync(bottledMessage) {
         if (nay) {
             console.log(nay);
         } else {
-            console.log(yea);
+            //console.log(yea);
         }
     });
 }

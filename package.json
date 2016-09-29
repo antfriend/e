@@ -42,6 +42,6 @@
   "solr": {
     "serverInst": "localhost",
     "coreInst": "folksonomy",
-    "isRunning":  false
+    "isRunning":  true
   }
 }
